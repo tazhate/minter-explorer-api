@@ -414,7 +414,7 @@
   analyzer-version = 1
   input-imports = [
     "github.com/Depado/ginprom",
-    "github.com/MinterTeam/minter-explorer-tools/models",
+    "github.com/MinterTeam/minter-explorer-tools/v4/models",
     "github.com/MinterTeam/minter-go-node/core/check",
     "github.com/MinterTeam/minter-go-node/formula",
     "github.com/centrifugal/centrifuge-go",

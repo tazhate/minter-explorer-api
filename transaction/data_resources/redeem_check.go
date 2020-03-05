@@ -4,7 +4,7 @@ import (
 	"encoding/base64"
 	"github.com/MinterTeam/minter-explorer-api/helpers"
 	"github.com/MinterTeam/minter-explorer-api/resource"
-	"github.com/MinterTeam/minter-explorer-tools/models"
+	"github.com/MinterTeam/minter-explorer-tools/v4/models"
 	"github.com/MinterTeam/minter-go-node/core/check"
 )
 
