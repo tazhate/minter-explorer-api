@@ -62,6 +62,10 @@
   branch = "dev"
 
 [[constraint]]
+  name = "github.com/MinterTeam/minter-go-sdk"
+  branch = "v1.1"
+
+[[constraint]]
   name = "golang.org/x/time"
   branch = "master"
 
