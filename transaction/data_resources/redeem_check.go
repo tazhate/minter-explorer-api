@@ -47,8 +47,8 @@ func TransformCheckData(raw string) (CheckData, error) {
 	}
 
 	return CheckData{
-		Coin:     string(data.Coin[:]),
-		GasCoin:  string(data.GasCoin[:]),
+		Coin:     helpers.ClearCoinSymbol(data.Coin),
+		GasCoin:  helpers.ClearCoinSymbol(data.GasCoin),
 		Nonce:    string(data.Nonce[:]),
 		Value:    helpers.PipStr2Bip(data.Value.String()),
 		Sender:   sender,

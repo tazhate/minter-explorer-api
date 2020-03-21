@@ -1,6 +1,10 @@
 package helpers
 
-import "math"
+import (
+	"bytes"
+	"fmt"
+	"math"
+)
 
 func RemoveMinterPrefix(raw string) string {
 	return raw[2:]
@@ -26,4 +30,8 @@ func CalculateEmission(blockId uint64) uint64 {
 	sum += (blockId % uint64(blocksPerReward)) * uint64(reward)
 
 	return sum
+}
+
+func ClearCoinSymbol(symbol [10]byte) string {
+	return fmt.Sprintf("%s", bytes.Trim(symbol[:], "\x00"))
 }
