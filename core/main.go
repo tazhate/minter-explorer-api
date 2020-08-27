@@ -14,6 +14,7 @@ import (
 	"github.com/MinterTeam/minter-explorer-api/tools/market"
 	"github.com/MinterTeam/minter-explorer-api/transaction"
 	"github.com/MinterTeam/minter-explorer-api/validator"
+	"github.com/MinterTeam/minter-explorer-api/waitlist"
 	"github.com/go-pg/pg"
 )
 
@@ -31,6 +32,7 @@ type Explorer struct {
 	Cache                        *cache.ExplorerCache
 	MarketService                *market.Service
 	BalanceService               *balance.Service
+	WaitlistRepository           waitlist.Repository
 }
 
 func NewExplorer(db *pg.DB, env *Environment) *Explorer {
@@ -51,5 +53,6 @@ func NewExplorer(db *pg.DB, env *Environment) *Explorer {
 		Cache:                        cache.NewCache(blockRepository.GetLastBlock()),
 		MarketService:                marketService,
 		BalanceService:               balance.NewService(env.BaseCoin, marketService),
+		WaitlistRepository:           *waitlist.NewRepository(db),
 	}
 }

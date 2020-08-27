@@ -10,6 +10,30 @@
   version = "v1.2.0"
 
 [[projects]]
+  branch = "master"
+  digest = "1:696c8d2d1fcd5d13bf58203593fc640b70917a7b9871741878efe86db55ec830"
+  name = "github.com/FactomProject/basen"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "fe3947df716ebfda9847eb1b9a48f9592e06478c"
+
+[[projects]]
+  branch = "master"
+  digest = "1:7e37fe0e25f70f38f090697a2850fbb53b6ac8051a29ff202d8a89a09292f55a"
+  name = "github.com/FactomProject/btcutilecc"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "d3a63a5752ecf3fbc06bd97365da752111c263df"
+
+[[projects]]
+  branch = "node1.2"
+  digest = "1:a5bdf89ebbe5372ea52959b63c75f81e4f3f9f4cc364d3e32780da350624bb86"
+  name = "github.com/MinterTeam/minter-explorer-extender"
+  packages = ["models"]
+  pruneopts = "UT"
+  revision = "475891a8a32a5cb35a6dee8a8ea7d131968cb6a0"
+
+[[projects]]
   digest = "1:95fe8c72adddfbcf0affaa5763cbaf7cbb1830030cef58e050381e2404af79bb"
   name = "github.com/MinterTeam/minter-explorer-tools"
   packages = ["models"]
@@ -19,22 +43,36 @@
 
 [[projects]]
   branch = "dev"
-  digest = "1:902f6b6f4c7c134d88567902e86a39a375c8f6ac109396a45d34204db60def7f"
+  digest = "1:1d58b88769e9041e5959c929fe0221b0658985c18af1932d5cdcc4be148f9921"
   name = "github.com/MinterTeam/minter-go-node"
   packages = [
-    "core/check",
     "core/types",
-    "crypto",
-    "crypto/secp256k1",
-    "crypto/sha3",
     "formula",
     "helpers",
     "hexutil",
     "math",
-    "rlp",
   ]
   pruneopts = "UT"
   revision = "0390de51d9df392558b67d37e8a9b6905f9000ed"
+
+[[projects]]
+  digest = "1:eb11485123a2a1cb75689357817d96a5e53824f364417f9844d88266ae4625e9"
+  name = "github.com/MinterTeam/minter-go-sdk"
+  packages = [
+    "transaction",
+    "wallet",
+  ]
+  pruneopts = "UT"
+  revision = "7336374a8feb026bcd943981d340aa3a717802e7"
+  version = "v1.1.6"
+
+[[projects]]
+  branch = "master"
+  digest = "1:256c8715fe89cca363b3b5f6a50feda22dc690089ad57f46169e368783dfe503"
+  name = "github.com/MinterTeam/node-grpc-gateway"
+  packages = ["api_pb"]
+  pruneopts = "UT"
+  revision = "9a899154bdc514c2dfae8e00fb9a5fa0025cfa3b"
 
 [[projects]]
   digest = "1:d6afaeed1502aa28e80a4ed0981d570ad91b2579193404256ce672ed0a609e0d"
@@ -61,6 +99,21 @@
   pruneopts = "UT"
   revision = "11a07e2e8b36da0626a3f3468175e6edfb6c300c"
   version = "v0.2.3"
+
+[[projects]]
+  digest = "1:9287a4fe65b6c4a6ac05e681dfe85a8ad45749e93c06b4b339825af27d905157"
+  name = "github.com/ethereum/go-ethereum"
+  packages = [
+    "common",
+    "common/hexutil",
+    "common/math",
+    "crypto",
+    "crypto/secp256k1",
+    "rlp",
+  ]
+  pruneopts = "UT"
+  revision = "979fc96899c77876e15807005eadd936da17b6c2"
+  version = "v1.9.20"
 
 [[projects]]
   digest = "1:abeb38ade3f32a92943e5be54f55ed6d6e3b6602761d74b4aab4c9dd45c18abd"
@@ -131,9 +184,21 @@
   version = "v1.2.1"
 
 [[projects]]
-  digest = "1:97df918963298c287643883209a2c3f642e6593379f97ab400c2a2e219ab647d"
+  digest = "1:5b8dc1b873940cfdf8cdfa78f383b6f8f42b3e816b922457af5d1b36db68bc4f"
   name = "github.com/golang/protobuf"
-  packages = ["proto"]
+  packages = [
+    "descriptor",
+    "jsonpb",
+    "proto",
+    "protoc-gen-go/descriptor",
+    "ptypes",
+    "ptypes/any",
+    "ptypes/duration",
+    "ptypes/empty",
+    "ptypes/struct",
+    "ptypes/timestamp",
+    "ptypes/wrappers",
+  ]
   pruneopts = "UT"
   revision = "aa810b61a9c79d51363740d207bb46cf8e620ed5"
   version = "v1.2.0"
@@ -145,6 +210,19 @@
   pruneopts = "UT"
   revision = "66b9c49e59c6c48f0ffce28c2d8b8a5678502c6d"
   version = "v1.4.0"
+
+[[projects]]
+  digest = "1:5562d1b7f5d88e2246479de517957542368bc625a526fa464b1e0c9497707507"
+  name = "github.com/grpc-ecosystem/grpc-gateway"
+  packages = [
+    "internal",
+    "protoc-gen-swagger/options",
+    "runtime",
+    "utilities",
+  ]
+  pruneopts = "UT"
+  revision = "37837bc5882204897dfb5b17ee231fc645c9102d"
+  version = "v1.14.7"
 
 [[projects]]
   digest = "1:c0d19ab64b32ce9fe5cf4ddceba78d5bc9807f0016db6b1183599da3dcc24d10"
@@ -333,6 +411,25 @@
   version = "v1.3.1"
 
 [[projects]]
+  branch = "master"
+  digest = "1:ec528a786fa75556deed44de7118a74ced456360e782786a20aed292a03955a5"
+  name = "github.com/tyler-smith/go-bip32"
+  packages = ["."]
+  pruneopts = "UT"
+  revision = "2c9cfd17756470a0b7c3e4b7954bae7d11035504"
+
+[[projects]]
+  digest = "1:91b40a2adb6b4ccd51b1dfb306edfa76139e1599b01666346085472b386f5447"
+  name = "github.com/tyler-smith/go-bip39"
+  packages = [
+    ".",
+    "wordlists",
+  ]
+  pruneopts = "UT"
+  revision = "5e3853c3f4e1a44df487c7efeb064ee8b43755de"
+  version = "1.0.2"
+
+[[projects]]
   digest = "1:4887e9e89c80299aa520d718239809fdd2a47a9aa394909b169959bfbc424ddf"
   name = "github.com/ugorji/go"
   packages = ["codec"]
@@ -342,14 +439,30 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:8c2c2c7c44fefb75e7c57ea831018010258a0b3ecdabcd658ee604e443302565"
+  digest = "1:28c0fced050871207c4e4e96670fc29f029a4e439bb4c51af1fb7f969347051d"
   name = "golang.org/x/crypto"
   packages = [
     "pbkdf2",
+    "ripemd160",
     "sha3",
   ]
   pruneopts = "UT"
   revision = "b8fe1690c61389d7d2a8074a507d1d40c5d30448"
+
+[[projects]]
+  branch = "master"
+  digest = "1:2c6f0bac9c19172b9ab8fb2da4c8d6d3856b55198e6ba63098c628ed206ceaf3"
+  name = "golang.org/x/net"
+  packages = [
+    "http/httpguts",
+    "http2",
+    "http2/hpack",
+    "idna",
+    "internal/timeseries",
+    "trace",
+  ]
+  pruneopts = "UT"
+  revision = "c89045814202410a2d67ec20ecf177ec77ceae7f"
 
 [[projects]]
   branch = "master"
@@ -363,15 +476,23 @@
   revision = "41f3e6584952bb034a481797859f6ab34b6803bd"
 
 [[projects]]
-  digest = "1:8029e9743749d4be5bc9f7d42ea1659471767860f0cdc34d37c3111bd308a295"
+  digest = "1:a2ab62866c75542dd18d2b069fec854577a20211d7c0ea6ae746072a1dccdd18"
   name = "golang.org/x/text"
   packages = [
+    "collate",
+    "collate/build",
+    "internal/colltab",
     "internal/gen",
+    "internal/tag",
     "internal/triegen",
     "internal/ucd",
+    "language",
+    "secure/bidirule",
     "transform",
+    "unicode/bidi",
     "unicode/cldr",
     "unicode/norm",
+    "unicode/rangetable",
   ]
   pruneopts = "UT"
   revision = "f21a4dfb5e38f5895301dc265a8def02365cc3d0"
@@ -384,6 +505,107 @@
   packages = ["rate"]
   pruneopts = "UT"
   revision = "c4c64cad1fd0a1a8dab2523e04e61d35308e131e"
+
+[[projects]]
+  branch = "master"
+  digest = "1:501f22c0c352e7827830774fca230898bab4b2e47e4b64fe2bb91eb60f6fe432"
+  name = "google.golang.org/genproto"
+  packages = [
+    "googleapis/api/annotations",
+    "googleapis/api/httpbody",
+    "googleapis/rpc/status",
+    "protobuf/field_mask",
+  ]
+  pruneopts = "UT"
+  revision = "8632dd7979872b9d9aaec9182aded5f0fc2162ea"
+
+[[projects]]
+  digest = "1:a78dd0bc72e72dcb8275f39d3cc9c3b4ff82c801dc39e27773b285a6b043ddd7"
+  name = "google.golang.org/grpc"
+  packages = [
+    ".",
+    "attributes",
+    "backoff",
+    "balancer",
+    "balancer/base",
+    "balancer/grpclb/state",
+    "balancer/roundrobin",
+    "binarylog/grpc_binarylog_v1",
+    "codes",
+    "connectivity",
+    "credentials",
+    "credentials/internal",
+    "encoding",
+    "encoding/proto",
+    "grpclog",
+    "internal",
+    "internal/backoff",
+    "internal/balancerload",
+    "internal/binarylog",
+    "internal/buffer",
+    "internal/channelz",
+    "internal/credentials",
+    "internal/envconfig",
+    "internal/grpclog",
+    "internal/grpcrand",
+    "internal/grpcsync",
+    "internal/grpcutil",
+    "internal/resolver/dns",
+    "internal/resolver/passthrough",
+    "internal/serviceconfig",
+    "internal/status",
+    "internal/syscall",
+    "internal/transport",
+    "keepalive",
+    "metadata",
+    "peer",
+    "resolver",
+    "serviceconfig",
+    "stats",
+    "status",
+    "tap",
+  ]
+  pruneopts = "UT"
+  revision = "39ef2aaf62df775b9c54a59957d113a0495cae73"
+  version = "v1.31.1"
+
+[[projects]]
+  digest = "1:5330c5c3f4b6b7f0902a0722ec8131afb49426103310fb2cc4656e9be27202ec"
+  name = "google.golang.org/protobuf"
+  packages = [
+    "encoding/prototext",
+    "encoding/protowire",
+    "internal/descfmt",
+    "internal/descopts",
+    "internal/detrand",
+    "internal/encoding/defval",
+    "internal/encoding/messageset",
+    "internal/encoding/tag",
+    "internal/encoding/text",
+    "internal/errors",
+    "internal/fieldsort",
+    "internal/filedesc",
+    "internal/filetype",
+    "internal/flags",
+    "internal/genid",
+    "internal/impl",
+    "internal/mapsort",
+    "internal/pragma",
+    "internal/set",
+    "internal/strs",
+    "internal/version",
+    "proto",
+    "reflect/protoreflect",
+    "reflect/protoregistry",
+    "runtime/protoiface",
+    "runtime/protoimpl",
+    "types/descriptorpb",
+    "types/known/anypb",
+    "types/known/fieldmaskpb",
+  ]
+  pruneopts = "UT"
+  revision = "3f7a61f89bb6813f89d981d1870ed68da0b3c3f1"
+  version = "v1.25.0"
 
 [[projects]]
   digest = "1:cbc72c4c4886a918d6ab4b95e347ffe259846260f99ebdd8a198c2331cf2b2e9"
@@ -414,9 +636,11 @@
   analyzer-version = 1
   input-imports = [
     "github.com/Depado/ginprom",
+    "github.com/MinterTeam/minter-explorer-extender/v2/models",
     "github.com/MinterTeam/minter-explorer-tools/models",
-    "github.com/MinterTeam/minter-go-node/core/check",
     "github.com/MinterTeam/minter-go-node/formula",
+    "github.com/MinterTeam/minter-go-sdk/transaction",
+    "github.com/MinterTeam/node-grpc-gateway/api_pb",
     "github.com/centrifugal/centrifuge-go",
     "github.com/gin-contrib/cors",
     "github.com/gin-gonic/gin",

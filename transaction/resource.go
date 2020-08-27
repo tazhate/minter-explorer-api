@@ -3,11 +3,15 @@ package transaction
 import (
 	"encoding/base64"
 	"encoding/json"
+	"github.com/MinterTeam/minter-explorer-api/coins"
 	"github.com/MinterTeam/minter-explorer-api/helpers"
 	"github.com/MinterTeam/minter-explorer-api/resource"
 	"github.com/MinterTeam/minter-explorer-api/transaction/data_resources"
-	"github.com/MinterTeam/minter-explorer-tools/models"
+	"github.com/MinterTeam/minter-explorer-extender/v2/models"
+	"github.com/MinterTeam/minter-go-sdk/v2/transaction"
+	"github.com/MinterTeam/node-grpc-gateway/api_pb"
 	"reflect"
+	"strconv"
 	"time"
 )
 
@@ -15,10 +19,12 @@ type Resource struct {
 	Txn       uint64                 `json:"txn"`
 	Hash      string                 `json:"hash"`
 	Nonce     uint64                 `json:"nonce"`
-	Block     uint64                 `json:"block"`
+	Block     uint64                 `json:"height"`
 	Timestamp string                 `json:"timestamp"`
+	GasCoin   resource.Interface     `json:"gas_coin"`
+	Gas       string                 `json:"gas"`
+	GasPrice  uint64                 `json:"gas_price"`
 	Fee       string                 `json:"fee"`
-	GasCoin   string                 `json:"gas_coin"`
 	Type      uint8                  `json:"type"`
 	Payload   string                 `json:"payload"`
 	From      string                 `json:"from"`
@@ -34,8 +40,10 @@ func (Resource) Transform(model resource.ItemInterface, params ...resource.Param
 		Nonce:     tx.Nonce,
 		Block:     tx.BlockID,
 		Timestamp: tx.CreatedAt.Format(time.RFC3339),
+		Gas:       strconv.FormatUint(tx.Gas, 10),
+		GasPrice:  tx.GasPrice,
 		Fee:       helpers.Fee2Bip(tx.GetFee()),
-		GasCoin:   tx.GasCoin.Symbol,
+		GasCoin:   new(coins.IdResource).Transform(*tx.GasCoin),
 		Type:      tx.Type,
 		Payload:   base64.StdEncoding.EncodeToString(tx.Payload[:]),
 		From:      tx.FromAddress.GetAddress(),
@@ -49,20 +57,24 @@ type TransformTxConfig struct {
 }
 
 var transformConfig = map[uint8]TransformTxConfig{
-	models.TxTypeSend:                {Model: new(models.SendTxData), Resource: data_resources.Send{}},
-	models.TxTypeSellCoin:            {Model: new(models.SellCoinTxData), Resource: data_resources.SellCoin{}},
-	models.TxTypeSellAllCoin:         {Model: new(models.SellAllCoinTxData), Resource: data_resources.SellAllCoin{}},
-	models.TxTypeBuyCoin:             {Model: new(models.BuyCoinTxData), Resource: data_resources.BuyCoin{}},
-	models.TxTypeCreateCoin:          {Model: new(models.CreateCoinTxData), Resource: data_resources.CreateCoin{}},
-	models.TxTypeDeclareCandidacy:    {Model: new(models.DeclareCandidacyTxData), Resource: data_resources.DeclareCandidacy{}},
-	models.TxTypeDelegate:            {Model: new(models.DelegateTxData), Resource: data_resources.Delegate{}},
-	models.TxTypeUnbound:             {Model: new(models.UnbondTxData), Resource: data_resources.Unbond{}},
-	models.TxTypeRedeemCheck:         {Model: new(models.RedeemCheckTxData), Resource: data_resources.RedeemCheck{}},
-	models.TxTypeMultiSig:            {Model: new(models.CreateMultisigTxData), Resource: data_resources.CreateMultisig{}},
-	models.TxTypeMultiSend:           {Model: new(models.MultiSendTxData), Resource: data_resources.Multisend{}},
-	models.TxTypeEditCandidate:       {Model: new(models.EditCandidateTxData), Resource: data_resources.EditCandidate{}},
-	models.TxTypeSetCandidateOnline:  {Model: new(models.SetCandidateTxData), Resource: data_resources.SetCandidate{}},
-	models.TxTypeSetCandidateOffline: {Model: new(models.SetCandidateTxData), Resource: data_resources.SetCandidate{}},
+	uint8(transaction.TypeSend):                {Model: new(api_pb.SendData), Resource: data_resources.Send{}},
+	uint8(transaction.TypeSellCoin):            {Model: new(api_pb.SellCoinData), Resource: data_resources.SellCoin{}},
+	uint8(transaction.TypeSellAllCoin):         {Model: new(api_pb.SellAllCoinData), Resource: data_resources.SellAllCoin{}},
+	uint8(transaction.TypeBuyCoin):             {Model: new(api_pb.BuyCoin), Resource: data_resources.BuyCoin{}},
+	uint8(transaction.TypeCreateCoin):          {Model: new(api_pb.CreateCoinData), Resource: data_resources.CreateCoin{}},
+	uint8(transaction.TypeDeclareCandidacy):    {Model: new(api_pb.DeclareCandidacyData), Resource: data_resources.DeclareCandidacy{}},
+	uint8(transaction.TypeDelegate):            {Model: new(api_pb.DelegateData), Resource: data_resources.Delegate{}},
+	uint8(transaction.TypeUnbond):              {Model: new(api_pb.UnbondData), Resource: data_resources.Unbond{}},
+	uint8(transaction.TypeRedeemCheck):         {Model: new(api_pb.RedeemCheckData), Resource: data_resources.RedeemCheck{}},
+	uint8(transaction.TypeCreateMultisig):      {Model: new(api_pb.CreateMultisigData), Resource: data_resources.CreateMultisig{}},
+	uint8(transaction.TypeMultisend):           {Model: new(api_pb.MultiSendData), Resource: data_resources.Multisend{}},
+	uint8(transaction.TypeEditCandidate):       {Model: new(api_pb.EditCandidateData), Resource: data_resources.EditCandidate{}},
+	uint8(transaction.TypeSetCandidateOnline):  {Model: new(api_pb.SetCandidateOnData), Resource: data_resources.SetCandidate{}},
+	uint8(transaction.TypeSetCandidateOffline): {Model: new(api_pb.SetCandidateOffData), Resource: data_resources.SetCandidate{}},
+	uint8(transaction.TypeSetHaltBlock):        {Model: new(api_pb.SetHaltBlockData), Resource: data_resources.SetHaltBlock{}},
+	uint8(transaction.TypeRecreateCoin):        {Model: new(api_pb.RecreateCoinData), Resource: data_resources.RecreateCoin{}},
+	uint8(transaction.TypeChangeCoinOwner):     {Model: new(api_pb.ChangeCoinOwnerData), Resource: data_resources.ChangeCoinOwner{}},
+	uint8(transaction.TypeEditMultisigOwners):  {Model: new(api_pb.EditMultisigOwnersData), Resource: data_resources.EditMultisigOwners{}},
 }
 
 func TransformTxData(tx models.Transaction) resource.Interface {

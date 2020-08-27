@@ -3,7 +3,7 @@ package stake
 import (
 	"github.com/MinterTeam/minter-explorer-api/helpers"
 	"github.com/MinterTeam/minter-explorer-api/tools"
-	"github.com/MinterTeam/minter-explorer-tools/models"
+	"github.com/MinterTeam/minter-explorer-extender/v2/models"
 	"github.com/go-pg/pg"
 )
 
@@ -37,7 +37,7 @@ func (repository Repository) GetPaginatedByAddress(address string, pagination *t
 	var err error
 
 	pagination.Total, err = repository.db.Model(&stakes).
-		Column("Coin.symbol", "Validator.public_key", "OwnerAddress._").
+		Column("Coin", "Validator.public_key", "OwnerAddress._").
 		Column("Validator.name", "Validator.description", "Validator.icon_url", "Validator.site_url").
 		Where("owner_address.address = ?", address).
 		Apply(pagination.Filter).

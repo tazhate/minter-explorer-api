@@ -4,7 +4,7 @@ import (
 	"github.com/MinterTeam/minter-explorer-api/events"
 	"github.com/MinterTeam/minter-explorer-api/helpers"
 	"github.com/MinterTeam/minter-explorer-api/tools"
-	"github.com/MinterTeam/minter-explorer-tools/models"
+	"github.com/MinterTeam/minter-explorer-extender/v2/models"
 	"github.com/go-pg/pg"
 )
 
@@ -23,7 +23,7 @@ func (repository Repository) GetPaginatedByAddress(filter events.SelectFilter, p
 	var err error
 
 	pagination.Total, err = repository.db.Model(&slashes).
-		Column("Coin.symbol", "Address.address", "Validator.public_key", "Block.created_at").
+		Column("Coin", "Address.address", "Validator.public_key", "Block.created_at").
 		Column("Validator.name", "Validator.description", "Validator.icon_url", "Validator.site_url").
 		Apply(filter.Filter).
 		Apply(pagination.Filter).

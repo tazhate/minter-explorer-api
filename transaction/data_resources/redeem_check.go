@@ -4,8 +4,8 @@ import (
 	"encoding/base64"
 	"github.com/MinterTeam/minter-explorer-api/helpers"
 	"github.com/MinterTeam/minter-explorer-api/resource"
-	"github.com/MinterTeam/minter-explorer-tools/models"
-	"github.com/MinterTeam/minter-go-node/core/check"
+	"github.com/MinterTeam/minter-go-sdk/transaction"
+	"github.com/MinterTeam/node-grpc-gateway/api_pb"
 )
 
 type RedeemCheck struct {
@@ -24,31 +24,35 @@ type CheckData struct {
 }
 
 func (RedeemCheck) Transform(txData resource.ItemInterface, params ...resource.ParamInterface) resource.Interface {
-	data := txData.(*models.RedeemCheckTxData)
+	data := txData.(*api_pb.RedeemCheckData)
+
+	//TODO: handle error
+	check, _ := TransformCheckData(data.GetRawCheck())
 
 	return RedeemCheck{
-		RawCheck: data.RawCheck,
-		Proof:    data.Proof,
-		Check:    TransformCheckData(data.RawCheck),
+		RawCheck: data.GetRawCheck(),
+		Proof:    data.GetProof(),
+		Check:    check,
 	}
 }
 
-func TransformCheckData(raw string) CheckData {
-	decoded, err := base64.StdEncoding.DecodeString(raw)
-	helpers.CheckErr(err)
-
-	data, err := check.DecodeFromBytes(decoded)
-	helpers.CheckErr(err)
+func TransformCheckData(raw string) (CheckData, error) {
+	data, err := transaction.DecodeCheck(raw)
+	if err != nil {
+		return CheckData{}, err
+	}
 
 	sender, err := data.Sender()
-	helpers.CheckErr(err)
+	if err != nil {
+		return CheckData{}, err
+	}
 
 	return CheckData{
-		Coin:     data.Coin.String(),
-		GasCoin:  data.GasCoin.String(),
-		Nonce:    base64.StdEncoding.EncodeToString(data.Nonce[:]),
+		Coin:     string(data.Coin[:]),
+		GasCoin:  string(data.GasCoin[:]),
+		Nonce:    base64.StdEncoding.EncodeToString(data.Nonce),
 		Value:    helpers.PipStr2Bip(data.Value.String()),
-		Sender:   sender.String(),
+		Sender:   sender,
 		DueBlock: data.DueBlock,
-	}
+	}, nil
 }

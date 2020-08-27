@@ -54,6 +54,10 @@
   version = "4.2.3"
 
 [[constraint]]
+  name = "github.com/MinterTeam/minter-explorer-extender"
+  branch = "node1.2"
+
+[[constraint]]
   name = "github.com/centrifugal/centrifuge-go"
   version = "0.2.3"
 
@@ -68,3 +72,11 @@
 [[constraint]]
   name = "github.com/Depado/ginprom"
   version = "1.2.0"
+
+[[constraint]]
+  name = "github.com/MinterTeam/node-grpc-gateway"
+  branch = "master"
+
+[[constraint]]
+  name = "github.com/MinterTeam/minter-go-sdk"
+  branch = "v2"
